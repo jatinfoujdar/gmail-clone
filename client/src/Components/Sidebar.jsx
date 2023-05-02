@@ -1,5 +1,6 @@
 import React from 'react';
 import { Drawer,styled } from '@mui/material';
+import SidebarContainer from './SidebarContainer';
 
 const Sidebar = () => {
   return (
@@ -10,7 +11,7 @@ const Sidebar = () => {
     borderRight: "none",
     height: "cal(100vh-64px)"
    }}}>
-hello
+<SidebarContainer/>
    </Drawer>
   )
 }
