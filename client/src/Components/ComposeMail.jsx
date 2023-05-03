@@ -35,7 +35,18 @@ const RecipientsWrapper = styled(Box)({
 const Footer = styled(Box)({
     display: "flex",
     justifyContent: "space-between",
-    
+    padding: "10px 15px",
+    alignItems: "center"
+})
+
+const SendButton = styled(Button)({
+
+    background: "#0B57D0",
+    color: "#fff",
+    fontWeight: "bold",
+    textTransform: "none",
+    borderRadius: 18,
+    width: "100"
 })
 
 const ComposeMail = () => {
@@ -49,9 +60,9 @@ const ComposeMail = () => {
     <InputBase placeholder='Recipients' />
     <InputBase placeholder='Subject' />
     </RecipientsWrapper>
-    <TextField multiline rows={20} sx={{"& .MuiOutlinedInput-notchedOutline": {border: "none"}}}/>
+    <TextField multiline rows={25} sx={{"& .MuiOutlinedInput-notchedOutline": {border: "none"}}}/>
     <Footer>
-      <Button>Send</Button>
+      <SendButton>Send</SendButton>
       <DeleteForeverOutlined/>
     </Footer>
    </Dialog>
