@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dialog,Box ,Typography,styled, InputBase, TextField, Button } from '@mui/material';
-import { Close, Padding,DeleteForeverOutlined } from '@mui/icons-material';
+import { Close,DeleteForeverOutlined } from '@mui/icons-material';
 
 
 
@@ -49,9 +49,9 @@ const SendButton = styled(Button)({
     width: "100"
 })
 
-const ComposeMail = () => {
+const ComposeMail = ({openDialog}) => {
   return (
-   <Dialog open={true} PaperProps={{sx: diaglogStyle}}>
+   <Dialog open={openDialog} PaperProps={{sx: diaglogStyle}}>
     <Header>
   <Typography>New Message</Typography>
   <Close fontSize='small'/>
