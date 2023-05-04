@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dialog,Box ,Typography,styled, InputBase, TextField, Button } from '@mui/material';
 import { Close,DeleteForeverOutlined } from '@mui/icons-material';
 
@@ -53,6 +53,8 @@ const SendButton = styled(Button)({
 
 const ComposeMail = ({openDialog,setOpenDialog}) => {
 
+  const[data,setData] = useState({});
+
   const config = {
     Host : "smtp.elasticemail.com",
     Username : "cobimo6725@soombo.com",
@@ -66,15 +68,16 @@ const ComposeMail = ({openDialog,setOpenDialog}) => {
     setOpenDialog(false);
   }
 
-  const sendMail = () =>{
+  const sendMail = (e) =>{
+    e.preventDefault()
 
     if(window.Email){
       window.Email.send({
      ...config,
-      To : 'them@website.com',
-      From : "you@isp.com",
-      Subject : "This is the subject",
-      Body : "And this is the body"
+      To : data.to,
+      From : "cobimo6725@soombo.com",
+      Subject : data.subject,
+      Body : data.body
   }).then(
     message => alert(message)
   );
@@ -83,6 +86,12 @@ const ComposeMail = ({openDialog,setOpenDialog}) => {
    setOpenDialog(false);
   }
 
+  const onValueChange = (e)=>{
+    setData ({...data,[e.target.name]: e.target.value})
+    console.log(data);
+  }
+  
+
   return (
    <Dialog open={openDialog} PaperProps={{sx: diaglogStyle}}>
     <Header>
@@ -90,12 +99,12 @@ const ComposeMail = ({openDialog,setOpenDialog}) => {
   <Close fontSize='small' onClick={(e)=>closeCompose(e)}/>
     </Header>
     <RecipientsWrapper>
-    <InputBase placeholder='Recipients' />
-    <InputBase placeholder='Subject' />
+    <InputBase placeholder='Recipients' name="to" onChange={(e)=> onValueChange(e)} />
+    <InputBase placeholder='Subject' name="subject" onChange={(e)=> onValueChange(e)}/>
     </RecipientsWrapper>
-    <TextField multiline rows={25} sx={{"& .MuiOutlinedInput-notchedOutline": {border: "none"}}}/>
+    <TextField multiline rows={25} sx={{"& .MuiOutlinedInput-notchedOutline": {border: "none"}}} name='body' onChange={(e)=> onValueChange(e)}/>
     <Footer>
-      <SendButton onClick={()=> sendMail()}>Send</SendButton>
+      <SendButton onClick={(e)=> sendMail(e)}>Send</SendButton>
       <DeleteForeverOutlined onClick={()=> setOpenDialog(false)}/>
     </Footer>
    </Dialog>
