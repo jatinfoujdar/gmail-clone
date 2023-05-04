@@ -58,6 +58,23 @@ const ComposeMail = ({openDialog,setOpenDialog}) => {
     setOpenDialog(false);
   }
 
+  const sendMail = () =>{
+    Email.send({
+      Host : "smtp.elasticemail.com",
+      Username : "cobimo6725@soombo.com",
+      Password : "9AAB51080D9013AB8EB14DD66CECEABFB692",
+      Posrt: "2525",
+      To : 'them@website.com',
+      From : "you@isp.com",
+      Subject : "This is the subject",
+      Body : "And this is the body"
+  }).then(
+    message => alert(message)
+  );
+
+   setOpenDialog(false);
+  }
+
   return (
    <Dialog open={openDialog} PaperProps={{sx: diaglogStyle}}>
     <Header>
@@ -70,8 +87,8 @@ const ComposeMail = ({openDialog,setOpenDialog}) => {
     </RecipientsWrapper>
     <TextField multiline rows={25} sx={{"& .MuiOutlinedInput-notchedOutline": {border: "none"}}}/>
     <Footer>
-      <SendButton>Send</SendButton>
-      <DeleteForeverOutlined/>
+      <SendButton onClick={()=> sendMail()}>Send</SendButton>
+      <DeleteForeverOutlined onClick={()=> setOpenDialog(false)}/>
     </Footer>
    </Dialog>
   )
