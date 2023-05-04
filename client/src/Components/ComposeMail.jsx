@@ -53,17 +53,24 @@ const SendButton = styled(Button)({
 
 const ComposeMail = ({openDialog,setOpenDialog}) => {
 
+  const config = {
+    Host : "smtp.elasticemail.com",
+    Username : "cobimo6725@soombo.com",
+    Password : "9AAB51080D9013AB8EB14DD66CECEABFB692",
+    Port: 2525 ,
+    
+}
+
   const closeCompose =(e)=>{
     e.preventDefault();
     setOpenDialog(false);
   }
 
   const sendMail = () =>{
-    Email.send({
-      Host : "smtp.elasticemail.com",
-      Username : "cobimo6725@soombo.com",
-      Password : "9AAB51080D9013AB8EB14DD66CECEABFB692",
-      Posrt: "2525",
+
+    if(window.Email){
+      window.Email.send({
+     ...config,
       To : 'them@website.com',
       From : "you@isp.com",
       Subject : "This is the subject",
@@ -71,6 +78,7 @@ const ComposeMail = ({openDialog,setOpenDialog}) => {
   }).then(
     message => alert(message)
   );
+}
 
    setOpenDialog(false);
   }
